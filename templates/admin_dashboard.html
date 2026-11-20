@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">ADMINISTRATION</p><h1>Dashboard</h1><p class="muted">System overview and management shortcuts.</p></div></div>
+<div class="stats"><div class="stat"><span>Registered students</span><strong>{{ stats.students }}</strong></div><div class="stat"><span>Total courses</span><strong>{{ stats.courses }}</strong></div><div class="stat"><span>Active registrations</span><strong>{{ stats.registrations }}</strong></div></div>
+<div class="feature-grid"><a class="panel link-panel" href="{{ url_for('admin.courses') }}"><h3>Manage Courses →</h3><p>Add, edit, delete and view course registrations.</p></a><a class="panel link-panel" href="{{ url_for('admin.students') }}"><h3>View Students →</h3><p>Review student account details.</p></a></div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Course Catalogue{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">COURSE CATALOGUE</p><h1>Explore courses</h1><p class="muted">Find a course that fits your study plan.</p></div></div>
+<form class="search" method="GET"><input name="q" value="{{ search }}" placeholder="Search by course name or code"><button class="button">Search</button></form>
+<div class="course-grid">
+{% for c in courses %}
+<article class="panel course-card"><div class="course-top"><span class="tag">{{ c.course_code }}</span><span class="seats">{{ c.available_seats }} seats left</span></div><h3>{{ c.course_name }}</h3><p class="muted">{{ c.description or 'Course details available from the department.' }}</p><p><strong>Instructor:</strong> {{ c.instructor }}</p><div class="course-bottom"><span>{{ c.credits }} credits</span><form method="POST" action="{{ url_for('student.register_course', course_id=c.course_id) }}"><button class="button small" {% if c.available_seats == 0 %}disabled{% endif %}>Register</button></form></div></article>
+{% else %}<p class="muted">No courses match your search.</p>{% endfor %}
+</div>
+{% endblock %}

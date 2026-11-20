@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Home | Online Course Registration{% endblock %}
+{% block content %}
+<section class="home-box">
+  <h1>Welcome to the Online Course Registration System</h1>
+  <p class="lead">Students can view available courses, register for courses and check their registered subjects. Administrators can manage courses and student registrations.</p>
+  <div class="actions">
+    <a class="button" href="{{ url_for('auth.register') }}">New Student Registration</a>
+    <a class="button secondary" href="{{ url_for('auth.login') }}">Student Login</a>
+  </div>
+</section>
+<h2 class="section-heading">System Features</h2>
+<section class="feature-grid">
+  <article class="panel"><h3>Course Catalogue</h3><p>View course details, credits, instructors and available seats.</p></article>
+  <article class="panel"><h3>Course Registration</h3><p>Register for available courses and view or drop registered courses.</p></article>
+  <article class="panel"><h3>Administration</h3><p>Manage course details and view student registrations.</p></article>
+</section>
+{% endblock %}

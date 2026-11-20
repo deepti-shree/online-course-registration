@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Edit Course{% endblock %}
+{% block content %}
+<div class="form-card wide"><p class="eyebrow">COURSE MANAGEMENT</p><h1>Edit course</h1>
+<form method="POST" class="form-grid">
+<label>Course code<input name="course_code" value="{{ course.course_code }}" required></label><label>Course name<input name="course_name" value="{{ course.course_name }}" required></label>
+<label>Instructor<input name="instructor" value="{{ course.instructor }}" required></label><label>Credits<input type="number" name="credits" min="1" max="24" value="{{ course.credits }}" required></label>
+<label>Total seats<input type="number" name="total_seats" min="0" value="{{ course.total_seats }}" required></label><label class="span-two">Description<textarea name="description" rows="3">{{ course.description }}</textarea></label>
+<div class="span-two"><button class="button">Update Course</button> <a class="button secondary" href="{{ url_for('admin.courses') }}">Cancel</a></div>
+</form></div>
+{% endblock %}

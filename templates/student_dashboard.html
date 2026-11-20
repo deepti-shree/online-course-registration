@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Student Dashboard{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">STUDENT OVERVIEW</p><h1>Welcome, {{ session.get('user_name') }}</h1><p class="muted">Here is your current course registration summary.</p></div><a class="button" href="{{ url_for('student.courses') }}">Browse Courses</a></div>
+<div class="stats"><div class="stat"><span>Active courses</span><strong>{{ courses|length }}</strong></div><div class="stat"><span>Registered credits</span><strong>{{ credits }} / 24</strong></div></div>
+<section class="panel"><h2>Your current courses</h2>
+{% if courses %}
+<div class="table-wrap"><table><thead><tr><th>Code</th><th>Course</th><th>Credits</th><th>Instructor</th><th>Action</th></tr></thead><tbody>
+{% for c in courses %}<tr><td>{{ c.course_code }}</td><td>{{ c.course_name }}</td><td>{{ c.credits }}</td><td>{{ c.instructor }}</td><td><form method="POST" action="{{ url_for('student.drop_course', course_id=c.course_id) }}" onsubmit="return confirm('Drop this course?')"><button class="button danger small">Drop</button></form></td></tr>{% endfor %}
+</tbody></table></div>
+{% else %}<p class="muted">You have not registered for any courses yet.</p>{% endif %}
+</section>
+{% endblock %}

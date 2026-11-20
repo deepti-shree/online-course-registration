@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Online Course Registration System{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script defer src="{{ url_for('static', filename='js/validate.js') }}"></script>
+</head>
+<body>
+<header class="navbar">
+  <a class="brand" href="{{ url_for('home') }}">Online Course Registration</a>
+  <nav>
+    {% if session.get('role') == 'student' %}
+      <a href="{{ url_for('student.dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('student.courses') }}">Courses</a>
+      <a href="{{ url_for('student.my_courses') }}">My Courses</a>
+      <a href="{{ url_for('auth.logout') }}">Logout</a>
+    {% elif session.get('role') == 'admin' %}
+      <a href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('admin.courses') }}">Manage Courses</a>
+      <a href="{{ url_for('admin.students') }}">Students</a>
+      <a href="{{ url_for('auth.logout') }}">Logout</a>
+    {% else %}
+      <a href="{{ url_for('auth.login') }}">Student Login</a>
+      <a href="{{ url_for('auth.register') }}">Register</a>
+      <a href="{{ url_for('auth.admin_login') }}">Admin Login</a>
+    {% endif %}
+  </nav>
+</header>
+<main class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer>Online Course Registration System</footer>
+</body>
+</html>

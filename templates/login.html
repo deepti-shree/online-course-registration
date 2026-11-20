@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Admin Login' if admin_login else 'Student Login' }}{% endblock %}
+{% block content %}
+<div class="form-card">
+  <p class="eyebrow">{{ 'ADMINISTRATION' if admin_login else 'WELCOME BACK' }}</p>
+  <h1>{{ 'Administrator login' if admin_login else 'Student login' }}</h1>
+  <form method="POST">
+    {% if admin_login %}
+      <label>Username<input name="username" required></label>
+    {% else %}
+      <label>Email address<input type="email" name="email" required></label>
+    {% endif %}
+    <label>Password<input type="password" name="password" required></label>
+    <button class="button full" type="submit">Log In</button>
+  </form>
+  {% if not admin_login %}<p class="muted center">New student? <a href="{{ url_for('auth.register') }}">Create an account</a></p>{% endif %}
+</div>
+{% endblock %}
